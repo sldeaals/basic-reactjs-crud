@@ -1,15 +1,12 @@
 import "./App.css";
 import { ProceduresScreen } from "./screens";
-import AlertProvider from "./providers/AlertProvider";
-import ProceduresProvider from "./providers/ProceduresProvider";
+import { StoreProvider } from "./providers";
 
 function App() {
   return (
-    <AlertProvider>
-      <ProceduresProvider>
-        <div className="App">{<ProceduresScreen />}</div>
-      </ProceduresProvider>
-    </AlertProvider>
+    <StoreProvider>
+      <div className="App">{<ProceduresScreen />}</div>
+    </StoreProvider>
   );
 }
 
