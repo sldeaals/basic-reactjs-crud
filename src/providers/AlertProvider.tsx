@@ -1,4 +1,4 @@
-import { useState, useCallback, ReactNode, FC } from "react";
+import { useState, useCallback, ReactNode, FC, useMemo } from "react";
 import { Alert, AlertSeverity } from "../types";
 import AlertContext from "./AlertContext";
 
@@ -15,10 +15,17 @@ const AlertProvider: FC<{ children: ReactNode }> = ({ children }) => {
     setAlert(null);
   }, []);
 
+  const value = useMemo(
+    () => ({
+      alert,
+      showAlert,
+      hideAlert,
+    }),
+    [alert, showAlert, hideAlert]
+  );
+
   return (
-    <AlertContext.Provider value={{ alert, showAlert, hideAlert }}>
-      {children}
-    </AlertContext.Provider>
+    <AlertContext.Provider value={value}>{children}</AlertContext.Provider>
   );
 };
 
