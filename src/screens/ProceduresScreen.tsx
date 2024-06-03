@@ -7,9 +7,7 @@ import Body from "../components/Body";
 import Footer from "../components/Footer";
 
 const ProceduresTable = lazy(() => import("../containers/ProceduresTable"));
-const ProceduresAlertPanel = lazy(
-  () => import("../containers/ProceduresAlertPanel")
-);
+const AlertPanel = lazy(() => import("../components/AlertPanel"));
 
 const ProceduresScreen: React.FC = () => {
   return (
@@ -32,7 +30,7 @@ const ProceduresScreen: React.FC = () => {
         <Footer>
           <Toolbar>
             <Suspense fallback={null}>
-              <ProceduresAlertPanel />
+              <AlertPanel />
             </Suspense>
           </Toolbar>
         </Footer>

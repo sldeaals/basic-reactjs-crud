@@ -1,15 +1,12 @@
-import React from "react";
 import "./App.css";
 import { ProceduresScreen } from "./screens";
-import ProceduresProvider from "./providers/ProceduresProvider";
+import { StoreProvider } from "./providers";
 
 function App() {
   return (
-    <ProceduresProvider>
-      <div className="App">
-        {<ProceduresScreen />}
-      </div>
-    </ProceduresProvider>
+    <StoreProvider>
+      <div className="App">{<ProceduresScreen />}</div>
+    </StoreProvider>
   );
 }
 

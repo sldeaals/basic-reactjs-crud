@@ -7,6 +7,7 @@ import React, {
   useCallback,
 } from "react";
 import { useProcedures } from "../../providers/ProceduresContext";
+import { useAlert } from "../../providers/AlertContext";
 import { ActionsEnum } from "../../types";
 import TableContainer from "../../components/TableContainer";
 import Table from "../../components/Table";
@@ -14,12 +15,16 @@ import ToolBar from "../../components/ToolBar";
 import CustomButton from "../../components/CustomButton";
 import EmptyTable from "../../components/EmptyTable";
 import CreateIcon from "@mui/icons-material/Create";
+import { ProcedureActionMessages } from "../../utils/constants";
 
 const ProceduresEditModal = lazy(() => import("../ProceduresEditModal"));
 
 const ProceduresTable: React.FC = memo(() => {
+  const { showAlert } = useAlert();
   const {
     proceduresData,
+    actionProcedure,
+    prevActionProcedure,
     fetchProcedures,
     updateActionProcedure,
     cancelProcedureChanges,
@@ -46,8 +51,16 @@ const ProceduresTable: React.FC = memo(() => {
   }, []);
 
   const handleSaveModal = useCallback(() => {
+    showAlert(
+      ProcedureActionMessages[
+        actionProcedure === ActionsEnum.SAVE
+          ? prevActionProcedure
+          : actionProcedure
+      ],
+      "info"
+    );
     setIsModalOpen(false);
-  }, []);
+  }, [showAlert, actionProcedure, prevActionProcedure]);
 
   useEffect(() => {
     fetchProcedures();
