@@ -18,4 +18,10 @@ export interface RowData {
   [key: string]: string;
 }
 
+export interface ModalProps {
+  onClose: () => void;
+  open: boolean;
+  className?: string;
+}
+
 export type { Procedures };
