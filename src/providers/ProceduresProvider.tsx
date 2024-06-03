@@ -25,15 +25,9 @@ const ProceduresProvider: FC<ProceduresProviderProps> = ({ children }) => {
   const updateActionProcedure = useCallback(
     (action: ActionsEnum) => {
       setPrevActionProcedure(actionProcedure);
-      setActionProcedure(
-        action === ActionsEnum.SAVE
-          ? prevActionProcedure
-          : action === ActionsEnum.ERROR
-          ? ActionsEnum.ERROR
-          : ActionsEnum.NONE
-      );
+      setActionProcedure(action);
     },
-    [actionProcedure, prevActionProcedure]
+    [actionProcedure]
   );
 
   const addProcedure = useCallback((newRecord: Procedures) => {
@@ -71,6 +65,7 @@ const ProceduresProvider: FC<ProceduresProviderProps> = ({ children }) => {
 
       setProceduresData(resultData);
       setProcedures(resultData);
+      setError(null);
     } catch (error) {
       console.error("Error fetching procedures:", error);
       setError("Failed to fetch procedures.");
