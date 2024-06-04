@@ -1,5 +1,4 @@
 import React, { ReactNode, memo } from "react";
-import AlertProvider from "./AlertProvider";
 import ProceduresProvider from "./ProceduresProvider";
 
 interface StoreProviderProps {
@@ -7,11 +6,7 @@ interface StoreProviderProps {
 }
 
 const StoreProvider: React.FC<StoreProviderProps> = memo(({ children }) => {
-  return (
-    <AlertProvider>
-      <ProceduresProvider>{children}</ProceduresProvider>
-    </AlertProvider>
-  );
+  return <ProceduresProvider>{children}</ProceduresProvider>;
 });
 
 export default StoreProvider;
