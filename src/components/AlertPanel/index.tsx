@@ -1,50 +1,58 @@
-import React, { memo, useEffect, useCallback, useMemo } from "react";
+import React, { memo, useState, useEffect, useCallback, useMemo } from "react";
 import Box from "@mui/material/Box";
 import Alert from "@mui/material/Alert";
-import { useAlert } from "../../providers/AlertContext";
+import { Alert as TAlert } from "../../types";
 import { useStyles } from "./styles";
 
 interface AlertPanelProps {
   className?: string;
+  alert?: TAlert | null;
 }
 
-const AlertPanel: React.FC<AlertPanelProps> = memo(({ className }) => {
-  const { alert, hideAlert } = useAlert();
-  const classes = useStyles();
+const AlertPanel: React.FC<AlertPanelProps> = memo(
+  ({ alert: incomingAlert, className }) => {
+    const [currentAlert, setCurrentAlert] = useState<TAlert | null>(null);
+    const classes = useStyles();
 
-  const parentClass = useMemo(
-    () => `${classes.alertPanel} ${className || ""}`.trim(),
-    [classes.alertPanel, className]
-  );
+    const parentClass = useMemo(
+      () => `${classes.alertPanel} ${className || ""}`.trim(),
+      [classes.alertPanel, className]
+    );
 
-  const handleClose = useCallback(() => {
-    hideAlert();
-  }, [hideAlert]);
+    const handleClose = useCallback(() => {
+      setCurrentAlert(null);
+    }, []);
 
-  useEffect(() => {
-    if (alert) {
-      const timer = setTimeout(() => {
-        hideAlert();
-      }, 5000);
+    useEffect(() => {
+      if (currentAlert) {
+        const timer = setTimeout(() => {
+          setCurrentAlert(null);
+        }, 5000);
+        return () => clearTimeout(timer);
+      }
+    }, [currentAlert]);
 
-      return () => clearTimeout(timer);
-    }
-  }, [alert, hideAlert]);
+    useEffect(() => {
+      if (incomingAlert?.message) {
+        setCurrentAlert(incomingAlert);
+      }
+    }, [incomingAlert]);
 
-  return (
-    <Box className={parentClass}>
-      {alert && (
-        <Alert
-          className={classes.alert}
-          variant="filled"
-          severity={alert?.severity}
-          onClose={handleClose}
-        >
-          {alert?.message}
-        </Alert>
-      )}
-    </Box>
-  );
-});
+    return (
+      <Box className={parentClass}>
+        {currentAlert && (
+          <Alert
+            className={classes.alert}
+            variant="filled"
+            severity={currentAlert.severity}
+            onClose={handleClose}
+          >
+            {currentAlert.message}
+          </Alert>
+        )}
+      </Box>
+    );
+  }
+);
 
 export default AlertPanel;
