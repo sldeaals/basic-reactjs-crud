@@ -7,7 +7,7 @@ import Add from "@mui/icons-material/Add";
 import EditTable from "../../components/EditTable";
 import { useProcedures } from "../../providers/ProceduresContext";
 import { ModalProps as BaseModalProps, Procedures } from "../../types";
-import { createProcedureData } from "../../utils";
+import { createProcedureData, isEmptyProcedure } from "../../utils";
 
 interface ProceduresEditModalProps extends BaseModalProps {
   onCancel: () => void;
@@ -24,10 +24,12 @@ const ProceduresEditModal: React.FC<ProceduresEditModalProps> = memo(
     );
 
     const handleAddRow = useCallback(() => {
-      setTableRows((prevRows) => [
-        ...prevRows,
-        createProcedureData("", "", "", "", "", ""),
-      ]);
+      setTableRows((prevRows) => {
+        const lastRow = prevRows[prevRows.length - 1];
+        return isEmptyProcedure(lastRow)
+          ? prevRows
+          : [...prevRows, createProcedureData("", "", "", "", "", "")];
+      });
     }, []);
 
     const handleDeleteRow = useCallback(
