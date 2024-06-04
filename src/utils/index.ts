@@ -25,7 +25,7 @@ export function createProcedureData(
   difference: string,
   authorized: string
 ): Procedures {
-  return { id: uuidv4(), procedure, code, claimed, difference, authorized };
+  return { id: id || uuidv4(), procedure, code, claimed, difference, authorized };
 }
 
 export const isEmptyProcedure = (record: Procedures): boolean => {
