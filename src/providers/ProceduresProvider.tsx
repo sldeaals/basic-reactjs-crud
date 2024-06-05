@@ -24,14 +24,21 @@ const ProceduresProvider: FC<ProceduresProviderProps> = ({ children }) => {
 
   const updateActionProcedure = useCallback(
     (action: ActionsEnum) => {
-      setPrevActionProcedure(prev => 
-        (action === ActionsEnum.SAVE || action === ActionsEnum.ERROR) && actionProcedure === ActionsEnum.ERROR 
-          ? prev 
+      setPrevActionProcedure((prev) =>
+        (action === ActionsEnum.SAVE || action === ActionsEnum.ERROR) &&
+        actionProcedure === ActionsEnum.ERROR
+          ? prev
           : actionProcedure
       );
-      setActionProcedure(action);
+      setActionProcedure(
+        action === ActionsEnum.SAVE
+          ? prevActionProcedure
+          : action === ActionsEnum.ERROR
+          ? ActionsEnum.ERROR
+          : ActionsEnum.NONE
+      );
     },
-    [actionProcedure]
+    [actionProcedure, prevActionProcedure]
   );
 
   const addProcedure = useCallback((newRecord: Procedures) => {
