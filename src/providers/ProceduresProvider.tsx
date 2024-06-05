@@ -24,7 +24,11 @@ const ProceduresProvider: FC<ProceduresProviderProps> = ({ children }) => {
 
   const updateActionProcedure = useCallback(
     (action: ActionsEnum) => {
-      setPrevActionProcedure(actionProcedure);
+      setPrevActionProcedure(prev => 
+        (action === ActionsEnum.SAVE || action === ActionsEnum.ERROR) && actionProcedure === ActionsEnum.ERROR 
+          ? prev 
+          : actionProcedure
+      );
       setActionProcedure(action);
     },
     [actionProcedure]
