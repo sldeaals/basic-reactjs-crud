@@ -7,7 +7,9 @@ import React, {
   useCallback,
 } from "react";
 import { useProcedures } from "../../providers/ProceduresContext";
+import { useAlert } from "../../providers/AlertContext";
 import { ActionsEnum } from "../../types";
+import { ProcedureActionMessages } from "../../utils/constants";
 import TableContainer from "../../components/TableContainer";
 import Table from "../../components/Table";
 import ToolBar from "../../components/ToolBar";
@@ -18,23 +20,21 @@ import CreateIcon from "@mui/icons-material/Create";
 const ProceduresEditModal = lazy(() => import("../ProceduresEditModal"));
 
 const ProceduresTable: React.FC = memo(() => {
-  const {
-    proceduresData,
-    fetchProcedures,
-    updateActionProcedure,
-    cancelProcedureChanges,
-  } = useProcedures();
+  const { proceduresData, fetchProcedures, cancelProcedureChanges } =
+    useProcedures();
+  const { showAlert } = useAlert();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [action, setAction] = useState<ActionsEnum>(ActionsEnum.NONE);
 
   const handleCreate = useCallback(() => {
-    updateActionProcedure(ActionsEnum.POST);
+    setAction(ActionsEnum.POST);
     setIsModalOpen(true);
-  }, [updateActionProcedure]);
+  }, []);
 
   const handleUpdate = useCallback(() => {
-    updateActionProcedure(ActionsEnum.PUT);
+    setAction(ActionsEnum.PUT);
     setIsModalOpen(true);
-  }, [updateActionProcedure]);
+  }, []);
 
   const handleCancelModal = useCallback(() => {
     cancelProcedureChanges();
@@ -46,8 +46,9 @@ const ProceduresTable: React.FC = memo(() => {
   }, []);
 
   const handleSaveModal = useCallback(() => {
+    showAlert(ProcedureActionMessages[action], "info");
     setIsModalOpen(false);
-  }, []);
+  }, [showAlert, action]);
 
   useEffect(() => {
     fetchProcedures();

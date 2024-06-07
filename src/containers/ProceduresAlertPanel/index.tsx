@@ -1,26 +1,10 @@
-import React, { memo, useMemo } from "react";
+import React, { memo } from "react";
 import { AlertPanel } from "../../components";
-import { useProcedures } from "../../providers/ProceduresContext";
-import { ProcedureActionMessages } from "../../utils/constants";
-import { ActionsEnum, Alert } from "../../types";
+import { useAlert } from "../../providers/AlertContext";
 
 const ProceduresAlertPanel: React.FC = memo(() => {
-  const { actionProcedure, prevActionProcedure, error } = useProcedures();
-
-  const alert = useMemo(() => {
-    if (actionProcedure === ActionsEnum.NONE) {
-      return null;
-    }
-    return {
-      message:
-        actionProcedure === ActionsEnum.ERROR
-          ? error || ""
-          : actionProcedure === ActionsEnum.SAVE
-          ? ProcedureActionMessages[prevActionProcedure]
-          : "",
-      severity: actionProcedure === ActionsEnum.ERROR ? "error" : "info",
-    } as Alert;
-  }, [actionProcedure, error, prevActionProcedure]);
+  const { alert } = useAlert();
+  console.log("ProceduresAlertPanel", alert);
 
   return <AlertPanel alert={alert} />;
 });
