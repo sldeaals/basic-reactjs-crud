@@ -1,11 +1,9 @@
 import { createContext, useContext } from "react";
-import { Procedures, ActionsEnum } from "../types";
+import { Procedures } from "../types";
 
 interface ProceduresContextType {
   proceduresData: Procedures[] | null;
   procedures: Procedures[];
-  actionProcedure: ActionsEnum;
-  prevActionProcedure: ActionsEnum;
   isLoading: boolean;
   error: string | null;
   addProcedure: (newRecord: Procedures) => void;
@@ -14,7 +12,6 @@ interface ProceduresContextType {
   deleteProcedure: (id: string | number) => void;
   saveProcedureChanges: (records: Procedures[]) => void;
   cancelProcedureChanges: () => void;
-  updateActionProcedure: (action: ActionsEnum) => void;
 }
 
 const ProceduresContext = createContext<ProceduresContextType | undefined>(

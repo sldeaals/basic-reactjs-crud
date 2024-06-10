@@ -12,5 +12,6 @@ export const useStyles = makeStyles({
   },
   alert: {
     minWidth: "64px",
+    zIndex: 2999,
   },
 });
