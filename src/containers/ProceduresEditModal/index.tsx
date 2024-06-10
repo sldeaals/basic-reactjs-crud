@@ -70,12 +70,12 @@ const ProceduresEditModal: React.FC<ProceduresEditModalProps> = memo(
       []
     );
 
-    const handleSave = useCallback(() => {
+    const handleSave = useCallback(async () => {
       const filteredRows = tableRows.filter(
         (row) => row.procedure.trim() !== "" && row.code.trim() !== ""
       );
 
-      saveProcedureChanges(filteredRows);
+      await saveProcedureChanges(filteredRows);
       onSave();
     }, [tableRows, saveProcedureChanges, onSave]);
 

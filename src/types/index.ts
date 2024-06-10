@@ -19,6 +19,11 @@ export enum ActionsEnum {
   NONE = "none",
 }
 
+export interface CrudActions {
+  initial: ActionsEnum;
+  current: ActionsEnum;
+}
+
 export interface RowData {
   [key: string]: string;
 }

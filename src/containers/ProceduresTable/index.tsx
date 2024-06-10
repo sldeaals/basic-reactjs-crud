@@ -46,14 +46,19 @@ const ProceduresTable: React.FC = memo(() => {
   }, []);
 
   const handleSaveModal = useCallback(() => {
-    showAlert(ProcedureActionMessages[action], "info");
+    if (!proceduresData) {
+      showAlert(ProcedureActionMessages[ActionsEnum.DELETE], "info");
+    } else {
+      showAlert(ProcedureActionMessages[action], "info");
+    }
+
     setIsModalOpen(false);
-  }, [showAlert, action]);
+  }, [proceduresData, action, showAlert]);
 
   useEffect(() => {
     fetchProcedures();
   }, [fetchProcedures]);
-
+  
   return (
     <>
       {!proceduresData ? (
