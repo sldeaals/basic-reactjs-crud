@@ -8,7 +8,7 @@ export const useStyles = makeStyles({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    gap: "20px",
+    gap: "var(--padding-xl)",
   },
   svgGroup: {
     width: "134px",

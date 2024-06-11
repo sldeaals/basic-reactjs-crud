@@ -5,14 +5,14 @@ export const useStyles = makeStyles({
     textTransform: "capitalize",
   },
   textField: {
-    background: "#F6F6FB",
-    borderRadius: "5px",
+    background: "var(--text-field-color)",
+    borderRadius: "var(--border-radius)",
     "@media (max-width: 768px)": {
       width: "-webkit-fill-available",
     },
     "& .MuiOutlinedInput-root": {
       "& fieldset": {
-        border: "2px solid #9CBEB3",
+        border: "var(--border-solid) solid var(--border-fieldset-color)",
       },
     },
   },
