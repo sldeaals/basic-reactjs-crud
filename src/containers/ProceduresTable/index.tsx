@@ -7,9 +7,7 @@ import React, {
   useCallback,
 } from "react";
 import { useProcedures } from "../../providers/ProceduresContext";
-import { useAlert } from "../../providers/AlertContext";
 import { ActionsEnum } from "../../types";
-import { ProcedureActionMessages } from "../../utils/constants";
 import TableContainer from "../../components/TableContainer";
 import Table from "../../components/Table";
 import ToolBar from "../../components/ToolBar";
@@ -22,7 +20,6 @@ const ProceduresEditModal = lazy(() => import("../ProceduresEditModal"));
 const ProceduresTable: React.FC = memo(() => {
   const { proceduresData, fetchProcedures, cancelProcedureChanges } =
     useProcedures();
-  const { showAlert } = useAlert();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [action, setAction] = useState<ActionsEnum>(ActionsEnum.NONE);
 
@@ -46,19 +43,13 @@ const ProceduresTable: React.FC = memo(() => {
   }, []);
 
   const handleSaveModal = useCallback(() => {
-    if (!proceduresData) {
-      showAlert(ProcedureActionMessages[ActionsEnum.DELETE], "info");
-    } else {
-      showAlert(ProcedureActionMessages[action], "info");
-    }
-
     setIsModalOpen(false);
-  }, [proceduresData, action, showAlert]);
+  }, []);
 
   useEffect(() => {
     fetchProcedures();
   }, [fetchProcedures]);
-  
+
   return (
     <>
       {!proceduresData ? (
@@ -90,6 +81,7 @@ const ProceduresTable: React.FC = memo(() => {
             onCancel={handleCancelModal}
             onSave={handleSaveModal}
             open={isModalOpen}
+            action={action}
           />
         </Suspense>
       )}
