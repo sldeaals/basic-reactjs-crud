@@ -8,15 +8,20 @@ import EditTable from "../../components/EditTable";
 import { useProcedures } from "../../providers/ProceduresContext";
 import { ModalProps as BaseModalProps, Procedures } from "../../types";
 import { createProcedureData, isEmptyProcedure } from "../../utils";
+import { ActionsEnum } from "../../types";
+import { ProcedureActionMessages } from "../../utils/constants";
+import { useAlert } from "../../providers/AlertContext";
 
 interface ProceduresEditModalProps extends BaseModalProps {
   onCancel: () => void;
   onSave: () => void;
+  action: ActionsEnum;
 }
 
 const ProceduresEditModal: React.FC<ProceduresEditModalProps> = memo(
-  ({ onClose, onCancel, onSave, open }) => {
+  ({ onClose, onCancel, onSave, open, action = ActionsEnum.NONE }) => {
     const { procedures, saveProcedureChanges } = useProcedures();
+    const { showAlert } = useAlert();
     const [tableRows, setTableRows] = useState<Procedures[]>(
       procedures?.length <= 0
         ? [createProcedureData("", "", "", "", "", "")]
@@ -76,8 +81,15 @@ const ProceduresEditModal: React.FC<ProceduresEditModalProps> = memo(
       );
 
       await saveProcedureChanges(filteredRows);
+
+      if (!filteredRows.length) {
+        showAlert(ProcedureActionMessages[ActionsEnum.DELETE], "warning");
+      } else {
+        showAlert(ProcedureActionMessages[action], "info");
+      }
+
       onSave();
-    }, [tableRows, saveProcedureChanges, onSave]);
+    }, [tableRows, action, saveProcedureChanges, showAlert, onSave]);
 
     useEffect(() => {
       if (procedures?.length <= 0) {
