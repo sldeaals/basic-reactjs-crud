@@ -1,14 +1,14 @@
-import React, { ReactNode, useMemo } from "react";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import { useStyles } from "./styles";
+import React, { ReactNode, useMemo } from 'react';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import { useStyles } from './styles';
 
 interface CustomButtonProps {
   onClick: () => void;
   className?: string;
   label: string;
   startIcon: ReactNode;
-  variant?: "contained" | "outlined" | "text";
+  variant?: 'contained' | 'outlined' | 'text';
   disabled?: boolean;
 }
 
@@ -17,14 +17,14 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   className,
   label,
   startIcon,
-  variant = "contained",
+  variant = 'contained',
   disabled = false,
 }) => {
   const classes = useStyles();
 
   const parentClass = useMemo(
-    () => `${classes.customButton} ${className || ""}`.trim(),
-    [classes.customButton, className]
+    () => `${classes.customButton} ${className || ''}`.trim(),
+    [classes.customButton, className],
   );
 
   return (
@@ -34,6 +34,9 @@ const CustomButton: React.FC<CustomButtonProps> = ({
       startIcon={startIcon}
       onClick={onClick}
       disabled={disabled}
+      role="button"
+      aria-label={label}
+      aria-disabled={disabled}
     >
       <Typography className={classes.buttonLabel}>{label}</Typography>
     </Button>

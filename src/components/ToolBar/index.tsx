@@ -1,6 +1,6 @@
-import React, { ReactNode, memo, useMemo } from "react";
-import Toolbar from "@material-ui/core/Toolbar";
-import { useStyles } from "./styles";
+import React, { ReactNode, memo, useMemo } from 'react';
+import Toolbar from '@material-ui/core/Toolbar';
+import { useStyles } from './styles';
 
 interface ToolBarProps {
   className?: string;
@@ -11,11 +11,19 @@ const ToolBar: React.FC<ToolBarProps> = memo(({ className, children }) => {
   const classes = useStyles();
 
   const parentClass = useMemo(
-    () => `${classes.toolbar} ${className || ""}`.trim(),
-    [classes.toolbar, className]
+    () => `${classes.toolbar} ${className || ''}`.trim(),
+    [classes.toolbar, className],
   );
 
-  return <Toolbar className={parentClass}>{children}</Toolbar>;
+  return (
+    <Toolbar
+      className={parentClass}
+      role="toolbar"
+      aria-label="application toolbar"
+    >
+      {children}
+    </Toolbar>
+  );
 });
 
 export default ToolBar;

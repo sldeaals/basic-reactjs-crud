@@ -1,11 +1,11 @@
-import React, { memo, useMemo } from "react";
-import Typography from "@mui/material/Typography";
-import SvgIcon from "@material-ui/core/SvgIcon";
-import FolderIcon from "@mui/icons-material/FolderOutlined";
-import Add from "@mui/icons-material/Add";
-import Box from "@mui/material/Box";
-import CustomButton from "../../components/CustomButton";
-import { useStyles } from "./styles";
+import React, { memo, useMemo } from 'react';
+import Typography from '@mui/material/Typography';
+import SvgIcon from '@material-ui/core/SvgIcon';
+import FolderIcon from '@mui/icons-material/FolderOutlined';
+import Add from '@mui/icons-material/Add';
+import Box from '@mui/material/Box';
+import CustomButton from '../../components/CustomButton';
+import { useStyles } from './styles';
 
 interface EmptyTableProps {
   onClick: () => void;
@@ -19,14 +19,16 @@ const EmptyTable: React.FC<EmptyTableProps> = memo(
     const classes = useStyles();
 
     const parentClass = useMemo(
-      () => `${classes.wrapperBox} ${className || ""}`.trim(),
-      [classes.wrapperBox, className]
+      () => `${classes.wrapperBox} ${className || ''}`.trim(),
+      [classes.wrapperBox, className],
     );
 
     return (
-      <Box className={parentClass}>
-        <SvgIcon className={classes.svgGroup}>{<FolderIcon />}</SvgIcon>
-        <Typography>{label}</Typography>
+      <Box className={parentClass} role="status">
+        <SvgIcon className={classes.svgGroup} role="img" aria-label="folder">
+          {<FolderIcon />}
+        </SvgIcon>
+        <Typography role="heading">{label}</Typography>
         <CustomButton
           onClick={onClick}
           startIcon={<Add />}
@@ -34,7 +36,7 @@ const EmptyTable: React.FC<EmptyTableProps> = memo(
         />
       </Box>
     );
-  }
+  },
 );
 
 export default EmptyTable;

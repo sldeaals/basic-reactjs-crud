@@ -1,4 +1,4 @@
-import React, { ReactNode, useCallback, useMemo } from "react";
+import React, { ReactNode, useCallback, useMemo } from 'react';
 import {
   Dialog,
   DialogActions,
@@ -8,13 +8,13 @@ import {
   Button,
   Box,
   Typography,
-} from "@mui/material";
-import AppBar from "@material-ui/core/AppBar";
-import Close from "@mui/icons-material/Close";
-import Body from "../Body";
-import Footer from "../Footer";
-import { ModalProps as BaseModalProps } from "../../types";
-import { useStyles } from "./styles";
+} from '@mui/material';
+import AppBar from '@material-ui/core/AppBar';
+import Close from '@mui/icons-material/Close';
+import Body from '../Body';
+import Footer from '../Footer';
+import { ModalProps as BaseModalProps } from '../../types';
+import { useStyles } from './styles';
 
 interface ModalProps extends BaseModalProps {
   title?: string;
@@ -27,7 +27,7 @@ const Modal: React.FC<ModalProps> = React.memo(
   ({ onClose, className, open, title, header, children, footer }) => {
     const classes = useStyles();
 
-    const parentClass = useMemo(() => `${className || ""}`.trim(), [className]);
+    const parentClass = useMemo(() => `${className || ''}`.trim(), [className]);
 
     const handleClose = useCallback(() => {
       onClose();
@@ -39,10 +39,13 @@ const Modal: React.FC<ModalProps> = React.memo(
         open={open}
         onClose={handleClose}
         fullWidth={true}
-        maxWidth={"lg"}
+        maxWidth={'lg'}
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
+        role="dialog"
       >
         <AppBar className={classes.headerContainer} position="sticky">
-          <Box className={classes.topToolBar}>
+          <Box className={classes.topToolBar} role="banner">
             {title && (
               <Typography className={classes.mobileTitle}>{title}</Typography>
             )}
@@ -50,6 +53,7 @@ const Modal: React.FC<ModalProps> = React.memo(
               className={classes.closeButton}
               variant="text"
               onClick={handleClose}
+              aria-label="close"
             >
               <Close />
             </Button>
@@ -63,7 +67,10 @@ const Modal: React.FC<ModalProps> = React.memo(
         </AppBar>
         {children && (
           <Body>
-            <DialogContent className={classes.dialogContent}>
+            <DialogContent
+              className={classes.dialogContent}
+              id="modal-description"
+            >
               {children}
             </DialogContent>
           </Body>
@@ -77,7 +84,7 @@ const Modal: React.FC<ModalProps> = React.memo(
         )}
       </Dialog>
     );
-  }
+  },
 );
 
 export default Modal;

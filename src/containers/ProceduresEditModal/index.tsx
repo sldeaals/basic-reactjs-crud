@@ -105,7 +105,7 @@ const ProceduresEditModal: React.FC<ProceduresEditModalProps> = memo(
         open={open}
         title={"Procedures"}
         header={
-          <Box>
+          <Box role="toolbar">
             <CustomButton
               label={"Add procedure"}
               variant="text"

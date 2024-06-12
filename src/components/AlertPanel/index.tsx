@@ -1,8 +1,8 @@
-import React, { memo, useState, useEffect, useCallback, useMemo } from "react";
-import Box from "@mui/material/Box";
-import Alert from "@mui/material/Alert";
-import { Alert as TAlert } from "../../types";
-import { useStyles } from "./styles";
+import React, { memo, useState, useEffect, useCallback, useMemo } from 'react';
+import Box from '@mui/material/Box';
+import Alert from '@mui/material/Alert';
+import { Alert as TAlert } from '../../types';
+import { useStyles } from './styles';
 
 interface AlertPanelProps {
   className?: string;
@@ -14,10 +14,10 @@ const AlertPanel: React.FC<AlertPanelProps> = memo(
     const [currentAlert, setCurrentAlert] = useState<TAlert | null>(null);
     const classes = useStyles();
 
-  const parentClass = useMemo(
-    () => `${classes.alertPanel} ${className || ""}`.trim(),
-    [classes.alertPanel, className]
-  );
+    const parentClass = useMemo(
+      () => `${classes.alertPanel} ${className || ''}`.trim(),
+      [classes.alertPanel, className],
+    );
 
     const handleClose = useCallback(() => {
       setCurrentAlert(null);
@@ -39,7 +39,12 @@ const AlertPanel: React.FC<AlertPanelProps> = memo(
     }, [incomingAlert]);
 
     return (
-      <Box className={parentClass}>
+      <Box
+        className={parentClass}
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
         {currentAlert && (
           <Alert
             className={classes.alert}
@@ -52,7 +57,7 @@ const AlertPanel: React.FC<AlertPanelProps> = memo(
         )}
       </Box>
     );
-  }
+  },
 );
 
 export default AlertPanel;
