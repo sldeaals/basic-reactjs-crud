@@ -1,11 +1,11 @@
 import React, { lazy, Suspense } from 'react';
-import Typography from '@mui/material/Typography';
 import Toolbar from '@mui/material/Toolbar';
 import Screen from '../components/Screen';
 import Header from '../components/Header';
 import Body from '../components/Body';
 import Footer from '../components/Footer';
 
+const ProceduresToolBar = lazy(() => import('../containers/ProceduresToolBar'));
 const ProceduresTable = lazy(() => import('../containers/ProceduresTable'));
 const ProceduresAlertPanel = lazy(
   () => import('../containers/ProceduresAlertPanel'),
@@ -16,11 +16,9 @@ const ProceduresScreen: React.FC = () => {
     <Screen
       header={
         <Header>
-          <Toolbar role="toolbar">
-            <Typography variant="h6" role="heading">
-              {'Procedures'}
-            </Typography>
-          </Toolbar>
+          <Suspense fallback={null}>
+            <ProceduresToolBar />
+          </Suspense>
         </Header>
       }
       body={
