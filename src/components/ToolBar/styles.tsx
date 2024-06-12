@@ -10,7 +10,7 @@ export const useStyles = makeStyles({
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-      gap: "8px",
+      gap: "var(--gap-medium)",
     },
   },
 });

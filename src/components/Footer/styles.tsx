@@ -4,7 +4,7 @@ export const useStyles = makeStyles({
   appBar: {
     top: "auto",
     bottom: 0,
-    backgroundColor: "#edf3f1",
+    backgroundColor: "var(--main-backgground)",
     color: "#000000",
     boxShadow: "none",
     fontWeight: 600,

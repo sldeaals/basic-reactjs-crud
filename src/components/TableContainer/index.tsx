@@ -1,6 +1,6 @@
-import React, { ReactNode, memo, useMemo } from "react";
-import MuiTableContainer from "@mui/material/TableContainer";
-import { useStyles } from "./styles";
+import React, { ReactNode, memo, useMemo } from 'react';
+import MuiTableContainer from '@mui/material/TableContainer';
+import { useStyles } from './styles';
 
 interface TableContainerProps {
   className?: string;
@@ -12,14 +12,20 @@ const TableContainer: React.FC<TableContainerProps> = memo(
     const classes = useStyles();
 
     const parentClass = useMemo(
-      () => `${classes.tableContainer} ${className || ""}`.trim(),
-      [classes.tableContainer, className]
+      () => `${classes.tableContainer} ${className || ''}`.trim(),
+      [classes.tableContainer, className],
     );
 
     return (
-      <MuiTableContainer className={parentClass}>{children}</MuiTableContainer>
+      <MuiTableContainer
+        className={parentClass}
+        role="region"
+        aria-label="table container"
+      >
+        {children}
+      </MuiTableContainer>
     );
-  }
+  },
 );
 
 export default TableContainer;

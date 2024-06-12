@@ -1,15 +1,27 @@
 :root {
   --gap-medium: 8px;
-  --gap-large: 12px;
+  --gap-medium: 12px;
+  --gap-large: 16px;
 
+  --padding-small: 8px;
+  --padding-medium: 12px;
+  --padding-large: 16px;
+  --padding-xl: 20px;
+  --padding-xxl: 24px;
+
+  --border-solid: 2px;
   --border-radius: 4px;
-
-  --padding: 12px;
+  --border-fieldset-color: #9CBEB3;
   
   --main-backgground: #edf3f1;
+
+  --font-title-mobile: "20px";
   --font-weight-bold: 600;
 
+  --letter-spacing-mobile: 0.12px;
+
   --text-transform: none;
+  --text-field-color: #F6F6FB;
 
   --button-padding: 8px;
   --button-text-color: #fff;

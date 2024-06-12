@@ -1,12 +1,12 @@
-import React, { useCallback, useMemo, memo } from "react";
-import { Table as MuiTable } from "@mui/material";
-import TableBody from "@material-ui/core/TableBody";
-import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
-import { Button } from "@mui/material";
-import Delete from "@mui/icons-material/Delete";
-import FormFieldCell from "../FormFieldCell";
-import { useStyles } from "./styles";
+import React, { useCallback, useMemo, memo } from 'react';
+import { Table as MuiTable } from '@mui/material';
+import TableBody from '@material-ui/core/TableBody';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
+import { Button } from '@mui/material';
+import Delete from '@mui/icons-material/Delete';
+import FormFieldCell from '../FormFieldCell';
+import { useStyles } from './styles';
 
 interface EditTableProps {
   className?: string;
@@ -14,7 +14,7 @@ interface EditTableProps {
   onUpdateRow: (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number,
-    field: string
+    field: string,
   ) => void;
   onDeleteRow: (index: number, record: Record<string, any>) => void;
 }
@@ -23,46 +23,47 @@ const EditTable: React.FC<EditTableProps> = memo(
   ({ className, data, onUpdateRow, onDeleteRow }): JSX.Element => {
     const classes = useStyles();
 
-    const parentClass = useMemo(() => `${className || ""}`.trim(), [className]);
+    const parentClass = useMemo(() => `${className || ''}`.trim(), [className]);
 
     const handleUpdateRow = useCallback(
       (
         e: React.ChangeEvent<HTMLInputElement>,
         index: number,
-        field: string
+        field: string,
       ) => {
         onUpdateRow(e, index, field);
       },
-      [onUpdateRow]
+      [onUpdateRow],
     );
 
     const handleDeleteRow = useCallback(
       (index: number, record: Record<string, any>) => {
         onDeleteRow(index, record);
       },
-      [onDeleteRow]
+      [onDeleteRow],
     );
 
     const tableRows = useMemo(() => {
       return data?.map((row, index) => (
-        <TableRow className={classes.tableRow} key={row.id || index}>
-          <TableCell className={classes.tableCell} align="left">
+        <TableRow className={classes.tableRow} key={row.id || index} role="row">
+          <TableCell className={classes.tableCell} align="left" role="cell">
             <Button
               className={classes.deleteButton}
               onClick={() => handleDeleteRow(index, row)}
+              aria-label="Delete Row"
             >
               <Delete />
             </Button>
           </TableCell>
-          {Object.keys(row).map((field) => {
-            if (field === "id") return null;
+          {Object.keys(row).map(field => {
+            if (field === 'id') return null;
             return (
               <FormFieldCell
                 key={field}
                 className={classes.tableCell}
                 label={field}
                 value={row[field]}
-                onChange={(e) => handleUpdateRow(e, index, field)}
+                onChange={e => handleUpdateRow(e, index, field)}
               />
             );
           })}
@@ -71,11 +72,13 @@ const EditTable: React.FC<EditTableProps> = memo(
     }, [data, classes, handleUpdateRow, handleDeleteRow]);
 
     return (
-      <MuiTable className={parentClass} aria-label="simple table">
-        <TableBody className={classes.tableBody}>{tableRows}</TableBody>
+      <MuiTable className={parentClass} aria-label="edit data table">
+        <TableBody className={classes.tableBody} role="rowgroup">
+          {tableRows}
+        </TableBody>
       </MuiTable>
     );
-  }
+  },
 );
 
 export default EditTable;

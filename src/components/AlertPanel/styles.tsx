@@ -8,7 +8,7 @@ export const useStyles = makeStyles({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-end",
-    gap: "12px",
+    gap: "var(--gap-medium)",
   },
   alert: {
     minWidth: "64px",

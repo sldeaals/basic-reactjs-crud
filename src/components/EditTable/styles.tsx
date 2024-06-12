@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 export const useStyles = makeStyles({
   tableBody: {
     "& > :not(:last-child)": {
-      borderBottom: "var(--gap-large) solid transparent",
+      borderBottom: "var(--gap-medium) solid transparent",
     },
   },
   tableRow: {
@@ -22,7 +22,7 @@ export const useStyles = makeStyles({
     border: "none",
     "@media (max-width: 768px)": {
       width: "100%",
-      padding: "8px 12px",
+      padding: "var(--padding-small) var(--padding-medium)",
     },
   },
   deleteButton: {

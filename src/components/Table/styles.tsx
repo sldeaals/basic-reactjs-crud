@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 export const useStyles = makeStyles({
   tableBody: {
     "& > :not(:last-child)": {
-      borderBottom: "var(--gap-large) solid var(--main-backgground)",
+      borderBottom: "var(--gap-medium) solid var(--main-backgground)",
     },
     "@media (max-width: 480px)": {
       display: "flex",
@@ -23,7 +23,7 @@ export const useStyles = makeStyles({
     "&.MuiTableCell-root": {
       "@media (max-width: 480px)": {
         border: "none",
-        padding: "8px 12px",
+        padding: "var(--padding-small) var(--padding-medium)",
       },
     },
   },

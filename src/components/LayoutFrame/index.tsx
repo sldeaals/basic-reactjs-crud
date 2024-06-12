@@ -1,5 +1,5 @@
-import React, { ReactNode, memo, useMemo } from "react";
-import { useStyles } from "./styles";
+import React, { ReactNode, memo, useMemo } from 'react';
+import { useStyles } from './styles';
 
 export interface LayoutFrameProps {
   className?: string;
@@ -11,12 +11,16 @@ const LayoutFrame: React.FC<LayoutFrameProps> = memo(
     const classes = useStyles();
 
     const parentClass = useMemo(
-      () => `${classes.layoutFrame} ${className || ""}`.trim(),
-      [classes.layoutFrame, className]
+      () => `${classes.layoutFrame} ${className || ''}`.trim(),
+      [classes.layoutFrame, className],
     );
 
-    return <div className={parentClass}>{children}</div>;
-  }
+    return (
+      <div className={parentClass} role="generic">
+        {children}
+      </div>
+    );
+  },
 );
 
 export default LayoutFrame;

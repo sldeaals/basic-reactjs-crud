@@ -5,7 +5,7 @@ export const useStyles = makeStyles({
     width: "100%",
     display: "flex",
     flexDirection: "column",
-    backgroundColor: "#edf3f1",
+    backgroundColor: "var(--main-backgground)",
     color: "#000000",
     boxShadow: "none",
     fontWeight: 600,
@@ -18,14 +18,14 @@ export const useStyles = makeStyles({
     justifyContent: "flex-end",
     gap: "16px",
     "@media (max-width: 480px)": {
-      padding: "8px 16px;",
+      padding: "var(--padding-small) var(--padding-large)",
     },
   },
   customDialogActions: {
     "&.MuiDialogActions-root": {
       padding: "0 24px",
       "@media (max-width: 480px)": {
-        padding: "0 16px",
+        padding: "0 var(--padding-large)",
       },
     },
   },
@@ -37,7 +37,7 @@ export const useStyles = makeStyles({
   dialogContent: {
     "&.MuiDialogContent-root": {
       "@media (max-width: 480px)": {
-        padding: "0 0 16px 0",
+        padding: "0 0 var(--padding-large) 0",
       },
     },
   },
@@ -49,9 +49,9 @@ export const useStyles = makeStyles({
   mobileTitle: {
     "&.MuiTypography-root": {
       fontWeight: 500,
-      fontSize: "1.25rem",
+      fontSize: "var(--font-title-mobile)",
       lineHeight: "1.6",
-      letterSpacing: "0.0075em",
+      letterSpacing: "var(--letter-spacing-mobile)",
     },
     display: "none",
     width: "100%",

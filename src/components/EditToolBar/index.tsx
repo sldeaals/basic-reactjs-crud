@@ -1,7 +1,7 @@
-import React, { ReactNode, memo, useMemo } from "react";
-import { Box, Button, Typography } from "@mui/material";
-import Check from "@mui/icons-material/Check";
-import { useStyles } from "./styles";
+import React, { ReactNode, memo, useMemo } from 'react';
+import { Box, Button, Typography } from '@mui/material';
+import Check from '@mui/icons-material/Check';
+import { useStyles } from './styles';
 
 interface EditToolBarProps {
   onCancel?: () => void;
@@ -17,8 +17,8 @@ const EditToolBar: React.FC<EditToolBarProps> = memo(
     const classes = useStyles();
 
     const parentClass = useMemo(
-      () => `${classes.topToolBar} ${className || ""}`.trim(),
-      [classes.topToolBar, className]
+      () => `${classes.topToolBar} ${className || ''}`.trim(),
+      [classes.topToolBar, className],
     );
 
     return (
@@ -29,8 +29,9 @@ const EditToolBar: React.FC<EditToolBarProps> = memo(
             className={classes.actionButton}
             variant="outlined"
             onClick={onCancel}
+            aria-label={cancelLabel}
           >
-            {saveLabel && (
+            {cancelLabel && (
               <Typography className={classes.buttonLabel}>
                 {cancelLabel}
               </Typography>
@@ -42,6 +43,7 @@ const EditToolBar: React.FC<EditToolBarProps> = memo(
           variant="contained"
           startIcon={<Check />}
           onClick={onSave}
+          aria-label={saveLabel}
         >
           {saveLabel && (
             <Typography className={classes.buttonLabel}>{saveLabel}</Typography>
@@ -49,7 +51,7 @@ const EditToolBar: React.FC<EditToolBarProps> = memo(
         </Button>
       </Box>
     );
-  }
+  },
 );
 
 export default EditToolBar;

@@ -8,11 +8,11 @@ export const useStyles = makeStyles({
     alignItems: "center",
     justifyContent: "flex-end",
     gap: "12px",
-    padding: "20px 24px",
+    padding: "var(--padding-xl) var(--padding-xxl)",
     "@media (max-width: 480px)": {
       flexDirection: "column-reverse",
-      gap: "12px",
-      padding: "16px 0px",
+      gap: "var(--gap-medium)",
+      padding: "var(--padding-large) 0px",
     },
   },
   actionButton: {

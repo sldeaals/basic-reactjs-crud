@@ -21,8 +21,8 @@ const Table: React.FC<TableProps> = memo(({ className, data }) => {
       return Object.keys(row).map((field) => {
         if (field === "id") return null;
         return (
-          <MuiTableCell className={classes.tableCell} align="left" key={field}>
-            <Typography className={classes.tableCellTitle}>{field}</Typography>
+          <MuiTableCell className={classes.tableCell} align="left" key={field} role="cell">
+            <Typography className={classes.tableCellTitle} role="columnheader">{field}</Typography>
             <Typography className={classes.tableCellTextValue}>
               {row[field]}
             </Typography>
@@ -34,10 +34,10 @@ const Table: React.FC<TableProps> = memo(({ className, data }) => {
   );
 
   return (
-    <MuiTable className={parentClass} aria-label="simple table">
-      <MuiTableBody className={classes.tableBody}>
+    <MuiTable className={parentClass} aria-label="data table" role="table">
+      <MuiTableBody className={classes.tableBody} role="rowgroup">
         {data?.map((row) => (
-          <MuiTableRow className={classes.tableRow} key={row.id}>
+          <MuiTableRow className={classes.tableRow} key={row.id} role="row">
             {renderTableCells(row)}
           </MuiTableRow>
         ))}
