@@ -7,6 +7,8 @@ export const useStyles = makeStyles({
     },
   },
   buttonLabel: {
-    textTransform: "none",
+    "&.MuiTypography-root": {
+      textTransform: "none",
+    },
   },
 });
